@@ -46,8 +46,16 @@ func handleRequests() {
 func returnSingleArticle(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	key := vars["id"]
+	fmt.Println("get id ", key)
 
-	fmt.Fprintf(w, "Key: "+key)
+	//fmt.Fprintf(w, "Key: "+key)
+	// get that article
+	for _, article := range Articles {
+		if article.ID == key {
+			json.NewEncoder(w).Encode(article)
+		}
+	}
+
 }
 
 func returnAllArticles(w http.ResponseWriter, r *http.Request) {
@@ -60,7 +68,7 @@ func main() {
 	// articles
 	Articles = []Article{
 		Article{
-			ID:      "2",
+			ID:      "1",
 			Title:   "Home",
 			Desc:    "Home Desc",
 			Content: "Home Content"},
