@@ -40,7 +40,7 @@ func handleRequests() {
 
 	// all articles
 	myRouter.HandleFunc("/articles", returnAllArticles)
-	log.Fatal(http.ListenAndServe(":9090", nil))
+	log.Fatal(http.ListenAndServe(":9090", myRouter))
 }
 
 func returnSingleArticle(w http.ResponseWriter, r *http.Request) {
