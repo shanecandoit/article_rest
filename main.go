@@ -36,11 +36,18 @@ func handleRequests() {
 	myRouter.HandleFunc("/", homePage)
 
 	// single article
-	//myRouter.HandleFunc("/article/{id}", returnSingleArticle)
+	myRouter.HandleFunc("/article/{id}", returnSingleArticle)
 
 	// all articles
 	myRouter.HandleFunc("/articles", returnAllArticles)
 	log.Fatal(http.ListenAndServe(":9090", nil))
+}
+
+func returnSingleArticle(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	key := vars["id"]
+
+	fmt.Fprintf(w, "Key: "+key)
 }
 
 func returnAllArticles(w http.ResponseWriter, r *http.Request) {
